@@ -65,7 +65,7 @@ export class PaymentsService {
         try {
             event = this.stripe.webhooks.constructEvent(req['rawBody'],signature,endpointSecret)
         } catch (err) {
-            res.status(400).send(`⚠️  Webhook signature verification failed.${ err.message}`)
+            res.status(400).send(`Webhook signature verification failed.${ err.message}`)
             return ;
         }
 
@@ -73,6 +73,10 @@ export class PaymentsService {
             case 'charge.succeeded':
                 const chargeSucceeded = event.data.object;
                 //Todo: llamar a nuestro microservicio
+                console.log({
+                    metadata : chargeSucceeded.metadata,
+                    orderid : chargeSucceeded.metadata.orderId
+                })
                 const payload = {
                     stripePaymentId : chargeSucceeded.id,
                     orderId : chargeSucceeded.metadata.orderId,

@@ -27,7 +27,7 @@ async function bootstrap() {
     },
     
   },
-  { inheritAppConfig: true },  //Hesto va a ser que mi aplicacion hibrida herede las configuraciones de pipes, validaciones, etc //https://docs.nestjs.com/faq/hybrid-application
+  { inheritAppConfig: true },  //Esto va a ser que mi aplicacion hibrida herede las configuraciones de pipes, validaciones, etc //https://docs.nestjs.com/faq/hybrid-application
 );
   await app.startAllMicroservices()
   await app.listen(process.env.PORT);
